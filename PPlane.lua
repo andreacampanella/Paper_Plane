@@ -4,7 +4,7 @@ function on_msg_receive (msg)
         return
     end
     if (msg.text=='Help') then
-        send_msg (msg.from.print_name, 'Ping,Photo,Reboot,Vrec,Vstop,Disk', ok_cb, false)
+        send_msg (msg.from.print_name, 'Ping,Photo,Reboot,Vrec,Vstop,Vsend,Disk', ok_cb, false)
     end
     
     if (msg.text=='Ping') then
@@ -17,13 +17,24 @@ function on_msg_receive (msg)
     end
 
     if (msg.text=='Vrec') then        
-        os.execute('/usr/bin/raspivid -o video_`date +%Y-%m-%d_%H:%M:%S`.mp4 -t 0 &')
+        os.execute('/usr/bin/raspivid -o ~/video_`date +%Y-%m-%d_%H:%M:%S`.mp4 -t 0 &')
         send_msg (msg.from.print_name, 'Recording.', ok_cb, false)
     end
 
     if (msg.text=='Vstop') then        
         os.execute('/usr/bin/killall raspivid')
         send_msg (msg.from.print_name, 'Done.', ok_cb, false)
+    end
+
+
+    if (msg.text=='Vsend') then
+        send_video (msg.from.print_name, '~/video_*', ok_cb, false)
+    end
+
+    if (msg.text=='Vdel') then
+         os.execute('/bin/rm ~/video_*')
+
+        send_video (msg.from.print_name, '~/video_*', ok_cb, false)
     end
 
     if (msg.text=='Disk') then        
