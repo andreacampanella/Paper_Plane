@@ -23,12 +23,14 @@ function on_msg_receive (msg)
 
     if (msg.text=='Vstop') then        
         os.execute('/usr/bin/killall raspivid')
-        send_msg (msg.from.print_name, 'DSone.', ok_cb, false)
+        send_msg (msg.from.print_name, 'Done.', ok_cb, false)
     end
 
     if (msg.text=='Disk') then        
-        
-        send_msg (msg.from.print_name, os.execute('/bin/df -h'), ok_cb, false)
+        local handle = io.popen('df -h / | tail -1 | awk '{print $4}'')
+        local result = handle:read("*a")
+        send_msg (msg.from.print_name, result, ok_cb, false)
+        handle:close()       
     end
     if (msg.text=='Reboot') then
      	os.execute('/sbin/reboot')
