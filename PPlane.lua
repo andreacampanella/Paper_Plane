@@ -27,9 +27,9 @@ function on_msg_receive (msg)
     end
 
     if (msg.text=='Disk') then        
-        local handle = io.popen('df -h / | tail -1 | awk '{print $4}'')
+        local handle = io.popen("df -h / | tail -1 | awk '{print $4}'")
         local result = handle:read("*a")
-        send_msg (msg.from.print_name, result, ok_cb, false)
+        send_msg (msg.from.print_name, "Disk space on / : " .. result , ok_cb, false)
         handle:close()       
     end
     if (msg.text=='Reboot') then
