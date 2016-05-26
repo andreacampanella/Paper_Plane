@@ -4,7 +4,7 @@ function on_msg_receive (msg)
         return
     end
     if (msg.text=='Help') then
-        send_msg (msg.from.print_name, 'Ping,Photo,Reboot,Vrec,Vstop,Vsend,Vdelcd ..,Disk', ok_cb, false)
+        send_msg (msg.from.print_name, 'Ping,Photo,Reboot,Vrec,Vstop,Vsend,Vdelcd,Disk', ok_cb, false)
     end
     
     if (msg.text=='Ping') then
@@ -12,7 +12,7 @@ function on_msg_receive (msg)
     end
     
     if (msg.text=='Photo') then
-     	os.execute('/usr/bin/raspistill -w 800 -h 600 -o /tmp/photo.jpg')
+     	os.execute('/usr/bin/raspistill -w 800 -h 600 -o /home/pi/photo.jpg')
      	send_photo (msg.from.print_name, '/tmp/photo.jpg', ok_cb, false)
     end
 
@@ -53,9 +53,21 @@ function on_msg_receive (msg)
         handle:close()       
     end
     if (msg.text=='Reboot') then
-     	os.execute('/sbin/reboot')
+     	os.execute('sudo /sbin/reboot')
      	send_msg (msg.from.print_name, 'Rebooting...', ok_cb, false)
     end
+
+    if (msg.text=='Ip') then
+        local handle = io.popen("wget http://ipinfo.io/ip -qO -")
+        local result = handle:read("*a")
+    end
+    
+    if (msg.text=='Update') then
+        local handle = io.popen("wget https://github.com/andreacampanella/Paper_Plane/blob/master/PPlane.lua -O /etc/telegram-cli/PPlane.lua")
+        local result = handle:read("*a")
+        send_msg (msg.from.print_name, 'Updated,reboot needed.', ok_cb, false)
+    end
+
 
 end
  

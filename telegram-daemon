@@ -25,9 +25,9 @@
 PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
 DESC="Telegram Messaging System"
 NAME=telegram-cli
-USERNAME=telegramd
-GROUPNAME=telegramd
-LOGFILE=/var/log/telegramd.log
+USERNAME=pi
+GROUPNAME=pi
+LOGFILE=/home/pi/telegramd.log
 DAEMON=/usr/bin/telegram-cli
 TGPORT=1234
 
