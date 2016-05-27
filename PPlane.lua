@@ -4,7 +4,7 @@ function on_msg_receive (msg)
         return
     end
     if (msg.text=='Help') then
-        send_msg (msg.from.print_name, 'Ping,Photo,Reboot,Vrec,Vstop,Vsend,Vdelcd,Disk', ok_cb, false)
+        send_msg (msg.from.print_name, 'Ping,Photo,Reboot,Vrec,Vstop,Vsend,Vdelcd,Disk,Ip,Update', ok_cb, false)
     end
     
     if (msg.text=='Ping') then
@@ -60,11 +60,12 @@ function on_msg_receive (msg)
     if (msg.text=='Ip') then
         local handle = io.popen("wget http://ipinfo.io/ip -qO -")
         local result = handle:read("*a")
+        send_msg (msg.from.print_name, "Ip : " .. result , ok_cb, false)
+        handle:close()               
     end
     
     if (msg.text=='Update') then
-        local handle = io.popen("wget https://github.com/andreacampanella/Paper_Plane/blob/master/PPlane.lua -O /etc/telegram-cli/PPlane.lua")
-        local result = handle:read("*a")
+        os.execute("wget https://github.com/andreacampanella/Paper_Plane/blob/master/PPlane.lua -O /etc/telegram-cli/PPlane.lua")
         send_msg (msg.from.print_name, 'Updated,reboot needed.', ok_cb, false)
     end
 
