@@ -52,6 +52,7 @@ function on_msg_receive (msg)
         send_msg (msg.from.print_name, "Disk space on / : " .. result , ok_cb, false)
         handle:close()       
     end
+    
     if (msg.text=='Reboot') then
      	os.execute('sudo /sbin/reboot')
      	send_msg (msg.from.print_name, 'Rebooting...', ok_cb, false)
@@ -65,7 +66,7 @@ function on_msg_receive (msg)
     end
     
     if (msg.text=='Update') then
-        os.execute("wget https://github.com/andreacampanella/Paper_Plane/blob/master/PPlane.lua -O /etc/telegram-cli/PPlane.lua")
+        os.execute("wget https://raw.githubusercontent.com/andreacampanella/Paper_Plane/master/PPlane.lua -O /etc/telegram-cli/PPlane.lua")
         send_msg (msg.from.print_name, 'Updated,reboot needed.', ok_cb, false)
     end
 
