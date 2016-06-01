@@ -54,8 +54,10 @@ function on_msg_receive (msg)
     end
     
     if (msg.text=='Restart') then
-        os.execute('echo raspberrypi | sudo -S service telegram-daemon restart')
-        send_msg (msg.from.print_name, 'Rebooting...', ok_cb, false)
+        local handle = io.popen('echo raspberry | sudo -S service telegram-daemon restart')
+        local result = handle:read("*a")
+        send_msg (msg.from.print_name, "Out : " .. result , ok_cb, false)
+        handle:close()
     end
 
     if (msg.text=='Ip') then
