@@ -69,7 +69,7 @@ function on_msg_receive (msg)
     
     if (msg.text=='Update') then
         os.execute("wget https://raw.githubusercontent.com/andreacampanella/Paper_Plane/master/PPlane.lua -O /etc/telegram-cli/PPlane.lua")
-        send_msg (msg.from.print_name, 'Updated,reboot needed.', ok_cb, false)
+        send_msg (msg.from.print_name, 'Updated,Restart needed.', ok_cb, false)
     end
 
 
