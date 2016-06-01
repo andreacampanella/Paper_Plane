@@ -53,9 +53,9 @@ function on_msg_receive (msg)
         handle:close()       
     end
     
-    if (msg.text=='Reboot') then
-     	os.execute('sudo /sbin/reboot')
-     	send_msg (msg.from.print_name, 'Rebooting...', ok_cb, false)
+    if (msg.text=='Restart') then
+        os.execute('echo raspberrypi | sudo -S service telegram-daemon restart')
+        send_msg (msg.from.print_name, 'Rebooting...', ok_cb, false)
     end
 
     if (msg.text=='Ip') then
