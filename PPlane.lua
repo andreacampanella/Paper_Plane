@@ -3,12 +3,14 @@ function on_msg_receive (msg)
     if msg.out then
         return
     end
+    
     if (msg.text=='Help') then
-        send_msg (msg.from.print_name, 'Ping,Photo,Restart,Vrec,Vstop,Vsend,Vdelcd,Disk,Ip,Update', ok_cb, false)
+        send_msg (msg.from.print_name, 'Ping,Photo,Reboot,Vrec,Vstop,Vsend,Vdelcd,Disk,Ip,Update', ok_cb, false)
     end
     
     if (msg.text=='Ping') then
 		send_msg (msg.from.print_name, 'Pong', ok_cb, false)
+        postpone (msg.from.print_name, 'Pong', 5)
     end
     
     if (msg.text=='Photo') then
@@ -53,12 +55,11 @@ function on_msg_receive (msg)
         handle:close()       
     end
     
-    if (msg.text=='Restart') then
-        local handle = io.popen('echo raspberry | sudo -S service telegram-daemon restart')
-        local result = handle:read("*a")
-        send_msg (msg.from.print_name, "Out : " .. result , ok_cb, false)
-        handle:close()
+    if (msg.text=='Reboot') then
+        os.execute('( sleep 5 ; sudo reboot ) & ')
+        send_msg (msg.from.print_name, 'Done.', ok_cb, false)
     end
+
 
     if (msg.text=='Ip') then
         local handle = io.popen("wget http://ipinfo.io/ip -qO -")
