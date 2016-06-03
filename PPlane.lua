@@ -10,7 +10,6 @@ function on_msg_receive (msg)
     
     if (msg.text=='Ping') then
 		send_msg (msg.from.print_name, 'Pong', ok_cb, false)
-        postpone (msg.from.print_name, 'Pong', 5)
     end
     
     if (msg.text=='Photo') then
@@ -57,7 +56,7 @@ function on_msg_receive (msg)
     
     if (msg.text=='Reboot') then
         os.execute('( sleep 5 ; sudo reboot ) & ')
-        send_msg (msg.from.print_name, 'Done.', ok_cb, false)
+        send_msg (msg.from.print_name, 'Rebooting in 5 seconds.', ok_cb, false)
     end
 
 
