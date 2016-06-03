@@ -4,7 +4,7 @@ function on_msg_receive (msg)
         return
     end
     if (msg.text=='Help') then
-        send_msg (msg.from.print_name, 'Ping,Photo,Reboot,Vrec,Vstop,Vsend,Vdelcd,Disk,Ip,Update', ok_cb, false)
+        send_msg (msg.from.print_name, 'Ping,Photo,Restart,Vrec,Vstop,Vsend,Vdelcd,Disk,Ip,Update', ok_cb, false)
     end
     
     if (msg.text=='Ping') then
@@ -12,12 +12,12 @@ function on_msg_receive (msg)
     end
     
     if (msg.text=='Photo') then
-     	os.execute('/usr/bin/raspistill -w 800 -h 600 -o /home/pi/photo.jpg')
+     	os.execute('/usr/bin/raspistill -t 1 -o /home/pi/photo.jpg')
      	send_photo (msg.from.print_name, '/home/pi/photo.jpg', ok_cb, false)
     end
 
-    if (msg.text=='Vrec') then        
-        os.execute('/usr/bin/raspivid -o ~/videos/video_`date +%m-%d_%H-%M-%S`.h264 -t 0 &')
+    if (msg.text=='Vrec') then 
+        os.execute('nohup /usr/bin/raspivid -o ~/videos/video_`date +%m-%d_%H-%M-%S`.h264 -t 0 &')
         send_msg (msg.from.print_name, 'Recording.', ok_cb, false)
     end
 
