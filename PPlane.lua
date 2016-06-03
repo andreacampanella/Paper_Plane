@@ -3,9 +3,9 @@ function on_msg_receive (msg)
     if msg.out then
         return
     end
-    
+
     if (msg.text=='Help') then
-        send_msg (msg.from.print_name, 'Ping,Photo,Reboot,Vrec,Vstop,Vsend,Vdelcd,Disk,Ip,Update', ok_cb, false)
+        send_msg (msg.from.print_name, 'Ping , Photo , Reboot , Vrec , Vstop , Vsend , Vdel , Disk , Ip , Update', ok_cb, false)
     end
     
     if (msg.text=='Ping') then
