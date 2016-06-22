@@ -11,10 +11,16 @@ Reboot  : Reboot the machine in 5 seconds (in case you are running this as user 
 permission on the reboot command).
 
 Vrec    : Start record a video.
+
 Vstop   : Stop record a video.
+
 Vsend   : Send the video(s) recorded,broken at the moment.
+
 Vdel    : Delete all the videos saved.
+
 Disk    : Give you the ammount of free space on the / partition.
+
 Ip      : Send you the public IP of the network.
+
 Update  : update from this repository, you will need to reboot after it.
 
