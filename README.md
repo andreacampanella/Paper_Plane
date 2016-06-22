@@ -7,7 +7,8 @@ Ping    : Answer with Pong.
 
 Photo   : Send you a picture taken from the webcam/camera
 
-Reboot  : Reboot the machine in 5 seconds (in case you are running this as user and not root you have to change the permission on the reboot command)
+Reboot  : Reboot the machine in 5 seconds (in case you are running this as user and not root you have to change the
+permission on the reboot command).
 
 Vrec    : Start record a video.
 Vstop   : Stop record a video.
