@@ -14,6 +14,7 @@ function on_msg_receive (msg)
     
     if (msg.text=='Photo') then
      	os.execute('/usr/bin/raspistill -t 1 -o /home/pi/photo.jpg')
+        send_msg (msg.from.print_name, 'Done. Sending...', ok_cb, false)
      	send_photo (msg.from.print_name, '/home/pi/photo.jpg', ok_cb, false)
     end
 
