@@ -19,7 +19,7 @@ function on_msg_receive (msg)
     end
 
     if (msg.text=='Vrec') then 
-        os.execute('nohup /usr/bin/raspivid -o ~/videos/video_`date +%m-%d_%H-%M-%S`.h264 -t 0 &')
+        os.execute('nohup /usr/bin/raspivid -w 1600 -h 1200 -o ~/videos/video_`date +%m-%d_%H-%M-%S`.h264 -t 0 &')
         send_msg (msg.from.print_name, 'Recording.', ok_cb, false)
     end
 
@@ -34,7 +34,7 @@ function on_msg_receive (msg)
         local pfile = popen('ls -a ~/videos/')
         
         for filename in pfile:lines() do
-            send_msg((msg.from.print_name,'/usr/bin/MP4Box -fps 25 -add ~/videos/'.. filename .. ' ~/videos/' .. filename ..'.mp4', ok_cb, false)
+            send_msg(msg.from.print_name,'/usr/bin/MP4Box -fps 25 -add ~/videos/'.. filename .. ' ~/videos/' .. filename ..'.mp4', ok_cb, false)
             os.execute('/usr/bin/MP4Box -fps 25 -add ~/videos/'.. filename .. ' ~/videos/' .. filename ..'.mp4')
             send_msg   (msg.from.print_name,"Sending ~/videos/" .. filename .. ".mp4", ok_cb, false)
             send_video (msg.from.print_name, '~/videos/' .. filename .. ".mp4", ok_cb, false)
